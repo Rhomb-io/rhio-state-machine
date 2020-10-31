@@ -6,7 +6,7 @@ This is a simple c++ portable library written for any platform but developed to 
 
 ## How it works
 
-YOu can define a number of states, give a name to each one and a callback, and then add all of them to a stack. Only one state (or callback) will run at the same time.
+You can define a number of states, give a name to each one and a callback, and then add all of them to a stack. Only one state (or callback) will run at the same time.
 
 The class uses a dynamic allocated array. The size of the array is created on the class constructor and never is modified.
 
@@ -86,3 +86,11 @@ This library was born because of the need to organize the code in large IoT appl
 The states allow to organize each moment of the life cycle of the application: the boot or setup, the normal operation mode, low consumption mode, the system error mode and any other that may be needed.
 
 Several states can be instantiated for different parts of the application, for example a network module can use the states to manage the whole process of connection and data transmission.
+
+## Development
+
+If you want to contribute to the development, the best way is to use [rhio-devkit](https://github.com/Rhomb-io/rhio-devkit), a project with VSCode and Platformio that includes a development copy of this repository.
+
+## License
+
+Developed by [Rhomb.io](https://rhomb.io) Software Team from Tecnofigners. Licensed under the GNU/GPL V3. Please concat us for commercial license or custom development.
