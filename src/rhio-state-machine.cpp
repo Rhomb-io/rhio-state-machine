@@ -1,9 +1,9 @@
 #include "rhio-state-machine.h"
 
-StateMachine::StateMachine(unsigned int size) {
-  size = size;
-  stateNames = new unsigned char[size];
-  callbacks = new CallbacksPtr[size];
+StateMachine::StateMachine(unsigned int _size) {
+  size = _size;
+  stateNames = new unsigned char[_size];
+  callbacks = new CallbacksPtr[_size];
   reset();
 }
 
