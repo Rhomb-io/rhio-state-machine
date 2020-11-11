@@ -1,9 +1,11 @@
 #include "rhio-state-machine.h"
 
-StateMachine::StateMachine(unsigned int size) {
-  size = size;
-  stateNames = new unsigned char[size];
-  callbacks = new CallbacksPtr[size];
+#include <Arduino.h>
+
+StateMachine::StateMachine(unsigned int _size) {
+  size = _size;
+  stateNames = new unsigned char[_size];
+  callbacks = new CallbacksPtr[_size];
   reset();
 }
 
@@ -23,7 +25,7 @@ void StateMachine::reset() {
 }
 
 int StateMachine::set(unsigned char stateName) {
-  int index = getStateIndex(stateName);
+  int index = getStateIndex((int)stateName);
   if (index >= 0) {
     currentState = index;
     run = callbacks[index];
