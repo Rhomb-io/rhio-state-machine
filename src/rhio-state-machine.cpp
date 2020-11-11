@@ -1,7 +1,5 @@
 #include "rhio-state-machine.h"
 
-#include <Arduino.h>
-
 StateMachine::StateMachine(unsigned int _size) {
   size = _size;
   stateNames = new unsigned char[_size];
