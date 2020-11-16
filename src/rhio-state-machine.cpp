@@ -5,6 +5,7 @@ StateMachine::StateMachine(unsigned int _size) {
   stateNames = new unsigned char[_size];
   callbacks = new CallbacksPtr[_size];
   onChangeCallback = 0;
+  currentState = -1;
   reset();
 }
 
