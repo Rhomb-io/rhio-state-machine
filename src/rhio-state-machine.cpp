@@ -28,10 +28,10 @@ void StateMachine::reset() {
 int StateMachine::set(unsigned char stateName) {
   int index = getStateIndex(stateName);
   if (index >= 0) {
+    int prevStateName = (currentState > -1) ? stateNames[currentState] : -1;
     currentState = index;
     run = callbacks[index];
     if (onChangeCallback != 0) {
-      int prevStateName = (currentState > -1) ? stateNames[currentState] : -1;
       onChangeCallback(prevStateName, stateName);
     }
     return index;
