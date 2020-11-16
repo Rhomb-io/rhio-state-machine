@@ -120,14 +120,52 @@ class StateMachine {
    * previous and new state
    */
   void onChange(void (*callback)(int prevState, int newState));
- private:
-  int getFreeIndex();
-  int getStateIndex(unsigned char stateName);
-  void resetIndex(int index);
 
+ private:
+  /**
+   * @brief Max number of states. It will allocate dynamic memory to save the
+   * callbacks
+   */
   unsigned int size;
+
+  /** @brief State/Callback to execute. Index of `CallbacksPtr* callbacks` */
   int currentState;
+
+  /**
+   * @brief An array to save the names of every state.
+   *
+   * This array is equivalent to `CallbacksPtr* callbacks`, this means that the
+   * name on the index 0 of `stateNames` has an associated callback on index 0
+   * of `CallbacksPtr* callbacks`
+   */
   unsigned char* stateNames;
+
+  /** @brief Function pointer typedef for state callbacks */
   typedef void (*CallbacksPtr)();
   CallbacksPtr* callbacks;
+
+  void (*onChangeCallback)(int prevState, int newState);
+
+  /**
+   * @brief Return the first empty index in the array `stateNames`
+   * @return int Index number, from 0 to (this->size - 1) or -1 if no more free
+   * indexes
+   */
+  int getFreeIndex();
+
+  /**
+   * @brief Return the index in stateNames for the given stateName
+   *
+   * @param stateName
+   * @return int Index or -1 if not found
+   */
+  int getStateIndex(unsigned char stateName);
+
+  /**
+   * @brief Remove the name and the callback for the given index in both
+   * `stateNames` and `callbacks` arrays
+   *
+   * @param index
+   */
+  void resetIndex(int index);
 };

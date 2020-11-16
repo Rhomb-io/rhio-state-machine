@@ -26,7 +26,7 @@ void StateMachine::reset() {
 }
 
 int StateMachine::set(unsigned char stateName) {
-  int index = getStateIndex((int)stateName);
+  int index = getStateIndex(stateName);
   if (index >= 0) {
     currentState = index;
     run = callbacks[index];
