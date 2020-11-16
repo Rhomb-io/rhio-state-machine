@@ -4,6 +4,7 @@ StateMachine::StateMachine(unsigned int _size) {
   size = _size;
   stateNames = new unsigned char[_size];
   callbacks = new CallbacksPtr[_size];
+  onChangeCallback = 0;
   reset();
 }
 
@@ -17,6 +18,7 @@ bool StateMachine::add(unsigned char stateName, void (*callback)()) {
 
 void StateMachine::reset() {
   run = []() {};
+  currentState = -1;
   for (unsigned int i = 0; i < size; i++) {
     resetIndex((int)i);
   }
@@ -27,6 +29,10 @@ int StateMachine::set(unsigned char stateName) {
   if (index >= 0) {
     currentState = index;
     run = callbacks[index];
+    if (onChangeCallback != 0) {
+      int prevStateName = (currentState > -1) ? stateNames[currentState] : -1;
+      onChangeCallback(prevStateName, stateName);
+    }
     return index;
   }
   return -1;
@@ -72,4 +78,8 @@ int StateMachine::getStateIndex(unsigned char stateName) {
 void StateMachine::resetIndex(int index) {
   stateNames[index] = 0;
   callbacks[index] = []() {};
+}
+
+void StateMachine::onChange(void (*callback)(int prevState, int newState)) {
+  onChangeCallback = callback;
 }

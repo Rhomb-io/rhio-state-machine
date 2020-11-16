@@ -49,7 +49,10 @@ class StateMachine {
    * The active state will be executed with each call to method `run()`.
    *
    * This method returns the index number where the callback is allocated in the
-   * stack of callbacks. This number
+   * stack of callbacks.
+   *
+   * Everytime a state changes the method `onChangeCallback()` will be called.
+   * If the new method is not valid the callback will not be called.
    *
    * @example
    * #define STATE_SETUP 0x01
@@ -109,6 +112,14 @@ class StateMachine {
    */
   bool removeByIndex(int index);
 
+  /**
+   * @brief Method to call every time a state changes. It may be used to alert
+   * about changes.
+   *
+   * @param callback The callback to call. Will receive the value of the
+   * previous and new state
+   */
+  void onChange(void (*callback)(int prevState, int newState));
  private:
   int getFreeIndex();
   int getStateIndex(unsigned char stateName);
