@@ -146,6 +146,7 @@ class StateMachine {
   typedef stateCallback (*CallbacksPtr)();
   CallbacksPtr* callbacks;
 
+  /** @brief Callback to run with every state change */
   void (*onChangeCallback)(int prevState, int newState);
 
   /**
