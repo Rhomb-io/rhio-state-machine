@@ -1,5 +1,7 @@
 #pragma once
 
+typedef void stateCallback;
+
 /**
  * @brief
  *
@@ -141,7 +143,7 @@ class StateMachine {
   unsigned char* stateNames;
 
   /** @brief Function pointer typedef for state callbacks */
-  typedef void (*CallbacksPtr)();
+  typedef stateCallback (*CallbacksPtr)();
   CallbacksPtr* callbacks;
 
   void (*onChangeCallback)(int prevState, int newState);
